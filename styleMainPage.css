@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 		body{
 			display: flex;
 			flex-direction: column;
@@ -9,6 +10,9 @@
 			width: 100%;
 		}
 		.menu{
+=======
+.menu{
+>>>>>>> 9fdf5396b5a0cf936efffe1dd1378e39b9d706cb
 			display: flex;
 			flex-direction: row;
 			align-items: center;
@@ -36,6 +40,7 @@
 			text-decoration: none;
 			font-size: 20px;
 		}
+<<<<<<< HEAD
 		#pattern{
 			position: relative;
 			width: 100%;
@@ -73,3 +78,6 @@
 		 .info{
 		 	display: grid;
 		 }
+=======
+		
+>>>>>>> 9fdf5396b5a0cf936efffe1dd1378e39b9d706cb
