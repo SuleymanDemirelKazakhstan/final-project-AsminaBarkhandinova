@@ -1,4 +1,3 @@
-
 let menu = [
 	{
 		"name": "Galaxy Cake",
@@ -57,40 +56,20 @@ let menu = [
 
 ];
 
-const iconUrl = "favourite.png";
 
-let gallery = document.querySelector("#grid-container");
+let list = document.querySelector("#menu");
 function addCakes() {
 
 	for(let cake of menu){
 		let item = document.createElement('div');
-		item.classList.add('grid-item');
-		item.innerHTML += `<img class="photo" src="${cake.src}"><p>${cake.name}</p><p>${cake.price} tenge</p>`;
-		item.innerHTML += `<img class="icon" src="${iconUrl}"/>`
-		gallery.appendChild(item);
+		item.classList.add('menu-item');
+		item.innerHTML += `<img class="menu-photo" src="${cake.src}"><div class="menu-name">${cake.name}</div>`;
+		item.innerHTML += `<button class="update">Update</button>
+							<button class="delete">Delete</button>
+							<button class="retrive">Retrive</button>`;
+		list.appendChild(item);
 	}
 	
 }
 
 addCakes();
-
-function changeColor(event){
-	let target = event.target;
-	if(!target.classList.contains("icon")){
-		return;
-	}
-	if(target.classList.contains('_active')){
-
-		target.classList.remove('_active');
-		target.style.cssText = "background-color: transparent";
-	}
-	else{
-		target.classList.add('_active');
-		target.style.cssText = "background-color: #fcd5ca";
-	}
-}
-
-let myIcons = document.querySelectorAll(".icon");
-for(let icon of myIcons){
-	icon.addEventListener('click', changeColor)
-}
