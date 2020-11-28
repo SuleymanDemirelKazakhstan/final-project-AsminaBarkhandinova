@@ -96,13 +96,14 @@
 		 	flex-direction: column;
 		 	align-items: center;
 		 	margin: 10px;
+		 	transition: .5s ease;
 		 }
 
 		 .grid-item img{
 		 	width: 100%;
-		 	transition: .5s ease;
+		 	
 		 }
-		 .grid-item img:hover{
+		 .grid-item:hover{
 		 	cursor: pointer;
 		 	box-shadow: 15px 15px #98ff98;
 		 	opacity: 0.7;
@@ -116,11 +117,16 @@
 		 #map{
 		 	display: flex;
 		 	flex-direction: column;
+		 	justify-content: center;
 		 	align-items: center;
 		 	position: relative;
 		 	width: 100%;
 
 
+		 }
+
+		 #map img{
+		 	width: 100%;
 		 }
 		 #map p{
 		 	color: grey;
@@ -128,12 +134,6 @@
 		 	font-family: "Sofia", cursive;
 		 }
 
-		 #map img{
-		 	
-		 	padding-left: 10%;
-			padding-right: 10%;
-		 	
-		 }
 
 		 footer{
 		 	background-color: #fcf8f5;

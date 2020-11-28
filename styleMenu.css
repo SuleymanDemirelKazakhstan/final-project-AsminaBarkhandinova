@@ -58,9 +58,8 @@ body{
 			width: 80%;
 			margin: 20px;
 			padding: 20px;
-			
-
-
+			border: 2px solid #95622f;
+			border-radius: 10px;
 		}
 		#control-panel h1{
 			font-family: "Sofia", cursive;
@@ -76,6 +75,24 @@ body{
 			width: 100%;
 		}
 
+		#filter{
+			background-color: transparent;
+			border-radius: 5px;
+			border: 2px solid #95622f;
+			color: #95622f;
+			
+			font-family: "Sofia", cursive;
+			transition: .5s ease;
+			font-size: 15px;
+		}
+
+		#filter:hover{
+			cursor: pointer;
+			background-color: pink;
+			color: white;
+
+		}
+
 		#grid-container{
 		 	display: grid;
 		 	grid-template-columns: 33.3% 33.3% 33.3%;
@@ -84,7 +101,7 @@ body{
 		 	
 		 }
 
-		 @media only screen and (max-width: 400px) {
+		 @media only screen and (max-width: 500px) {
  			#grid-container{
  				display: flex;
  				flex-direction: column;
@@ -112,7 +129,7 @@ body{
 
 		 .icon:hover{
 		 	cursor: pointer;
-		 	background-color: #fcd5ca;
+		 	background-color: pink;
 		 }
 
 		 .photo{
