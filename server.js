@@ -17,5 +17,5 @@ app.get('/menu', (req,res)=>{
 });
 
 app.listen(4000, function(){
-	console.log('main server is listening');
+	console.log('Static files serving');
 });
