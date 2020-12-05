@@ -1,10 +1,13 @@
+const iconUrl = "html/favourite.png";
+
 async function loadJson() {
   const response = await fetch('http://localhost:3000/menu'); 
   const json = await response.json();
   let menu = json;
-	const iconUrl = "favourite.png";
+	
 
 	let gallery = document.querySelector("#grid-container");
+	gallery.innerHTML = "";
 	function addCakes() {
 
 		for(let cake of menu){
@@ -45,30 +48,51 @@ for(let icon of myIcons){
 	icon.addEventListener('clicked', changeColor);
 
 }
-//does not work
+
 async function loadFilter() {
-  const response = await fetch('http://localhost:3000/menu/filter'); 
-  const json = await response.json();
-  let menu = json;
-	const iconUrl = "favourite.png";
 
-	let gallery = document.querySelector("#grid-container");
-	function addCakes() {
+	let selected = document.getElementById("category");
+	let nameField = document.getElementById("productName");
+	let result = selected.value;
+	let nameValue = nameField.value;
+	console.log(nameValue);
+	console.log(result);
+	
+		if(nameValue === "" && result === "all"){
 
-		for(let cake of menu){
-			let item = document.createElement('div');
-			item.classList.add('grid-item');
-			item.innerHTML += `<img class="photo" src="${cake.src}"><p>${cake.name}</p><p>${cake.price} tenge</p>`;
-			item.innerHTML += `<img class="icon" src="${iconUrl}"/>`
-			gallery.appendChild(item);
-			
+			loadJson();//
+			return;
+		}
+		else{
+			const response = await fetch(`http://localhost:3000/menu/${result}/${nameValue}`); 
+			  const json = await response.json();
+			  let menu = json;
+				
+
+				let gallery = document.querySelector("#grid-container");
+				gallery.innerHTML = "";
+				function addCakes() {
+
+					for(let cake of menu){
+						let item = document.createElement('div');
+						item.classList.add('grid-item');
+						item.innerHTML += `<img class="photo" src="${cake.src}"><p>${cake.name}</p><p>${cake.price} tenge</p>`;
+						item.innerHTML += `<img class="icon" src="${iconUrl}"/>`
+						gallery.appendChild(item);
+						
+					}
+					
+				}
+
+				addCakes();
+				return;
+
 		}
 		
-	}
+	
+	
 
-	addCakes();
+  
 	
 }
 
-let buttonSearch = document.getElementById("filter");
-buttonSearch.addEventListener('click', loadFilter());
