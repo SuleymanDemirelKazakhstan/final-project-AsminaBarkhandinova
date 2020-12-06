@@ -20,3 +20,21 @@ async function loadJson(){
 	addCakes();
 }
  loadJson();
+
+let modal = document.getElementById("my_modal");
+let btn = document.getElementById("btn_modal_window");
+
+
+ btn.onclick = function () {
+    modal.style.display = "block";
+ }
+
+ span.onclick = function () {
+    modal.style.display = "none";
+ }
+
+ window.onclick = function (event) {
+    if (event.target == modal) {
+        modal.style.display = "none";
+    }
+}

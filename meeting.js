@@ -44,8 +44,6 @@ app.get('/menu/:category', (req, res)=>{
 	
 });
 
-
-
 app.get('/menu/:category/:name', (req, res)=>{
 
 	const {category, name} = req.params;
@@ -86,31 +84,6 @@ app.put('/menu/update/:id', (req, res)=>{
 	const newData = req.body;
 	Cakes.findOneAndUpdate({_id: id}, newData).then(()=> res.send(newData)).catch(()=>console.log('error'));
 });
-
-/* CRUD with arrays, works
-app.get('/best', (req, res)=>{
-	res.send(bestsellers);
-});
-
-app.post('/best', (req, res)=>{
-	const { name, src } = req.body;
-	console.log(name, src);
-});
-
-app.put('/best/:n', (req, res)=>{
-	const {n} = req.params;
-	const { name, src } = req.body;
-	bestsellers[n].name = name;
-	bestsellers[n].src = src;
-	res.send(bestsellers[n]);
-});
-
-app.delete('/best/:n', (req, res)=>{
-	const {n} = req.params;
-	bestsellers.splice(n, 1);
-	res.send(bestsellers);
-	
-})*/
 
 app.listen(3000, function(){
 	console.log('Server 3000 is listening');
