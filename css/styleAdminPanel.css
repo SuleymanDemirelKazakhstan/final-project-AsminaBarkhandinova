@@ -59,7 +59,7 @@ body{
 			font-size: 30px;
 		}
 
-		#admin-panel button{
+		#btn_modal_window{
 			width: 100%;
 			padding: 10px;
 			text-align: center;
@@ -71,7 +71,22 @@ body{
 
 		}
 
-		#admin-panel button:hover{
+		#btn_modal_window:hover{
+			cursor: pointer;
+			opacity: 0.3;
+		}
+
+		#createButton{
+			padding: 10px;
+			text-align: center;
+			background-color: #98ff98;
+			color: white;
+			font-family: "Sofia", cursive;
+			font-size: 16px;
+			transition: .5s ease;
+		}
+
+		#createButton:hover{
 			cursor: pointer;
 			opacity: 0.3;
 		}
@@ -222,5 +237,9 @@ body{
     border: 1px solid #888;
     width: 80%;
     z-index: 99999;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
    
 }

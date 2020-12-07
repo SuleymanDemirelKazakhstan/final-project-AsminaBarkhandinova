@@ -1,5 +1,7 @@
 const express = require('express');
 const app = express();
+const cors = require('cors');
+app.use(cors());
 const morgan = require('morgan');
 const mongoose = require('mongoose');
 mongoose.connect('mongodb://localhost:27017/project', {useNewUrlParser: true, useUnifiedTopology: true});
@@ -8,6 +10,7 @@ const Cakes = mongoose.model('Menu',
 	  price: Number,
 	  src: String,
 	  description: String,
+	  isShown: {type: Boolean, default: true},
 	  category: String}, 'Menu');
 
 let allowCrossDomain = function(req, res, next){
@@ -22,23 +25,23 @@ app.use(morgan());
 
 
 app.get('/', (req, res)=>{
-	Cakes.find({}).limit(6).then(data => res.send(data)).catch(()=> console.log('error'));
+	Cakes.find({}).limit(6).then(data => res.send(data)).catch(()=> res.send("Error with acessing database"));
 	
 });
 
 app.get('/menu', (req, res)=>{
-	Cakes.find({}).then(data => res.send(data)).catch(()=> console.log('error'));
+	Cakes.find({isShown: true}).then(data => res.send(data)).catch(()=> res.send("Error with acessing database"));
 });
 
 app.get('/menu/:category', (req, res)=>{
 
 	const {category} = req.params;
 	if(category==="all"){
-		Cakes.find({}).then(data => res.send(data)).catch(()=> console.log('error'));
+		Cakes.find({isShown: true}).then(data => res.send(data)).catch(()=> res.send("Error with acessing database"));
 	}
 	else{
 		console.log(category);
-		Cakes.find({category: category.toLowerCase()}).then(data => res.send(data)).catch(()=> console.log('error'));
+		Cakes.find({category: category.toLowerCase(), isShown: true}).then(data => res.send(data)).catch(()=> res.send("Error with acessing database"));
 
 	}
 	
@@ -48,41 +51,48 @@ app.get('/menu/:category/:name', (req, res)=>{
 
 	const {category, name} = req.params;
 	if(category==="all"){
-		Cakes.find({name: name}).then(data => res.send(data)).catch(()=> console.log('error'));
+		Cakes.find({name: name, isShown: true}).then(data => res.send(data)).catch(()=> res.send("Error with acessing database"));
 	}
 	else{
 		console.log(category, name);
-		Cakes.find({category: category.toLowerCase(), name: name}).then(data => res.send(data)).catch(()=> console.log('error'));
+		Cakes.find({category: category.toLowerCase(), name: name, isShown: true}).then(data => res.send(data)).catch(()=> res.send("Error with acessing database"));
 
 	}
 	
 });
 
 app.get('/admin', (req, res)=>{
-	Cakes.find({}).then(data => res.send(data)).catch(()=> console.log('error'));
+	Cakes.find({}).then(data => res.send(data)).catch(()=> res.send("Error with acessing database"));
 });
 
 //CRUD with mongodb
-app.post('/menu/post', (req, res)=>{
-	const { name, price, src } = req.body;
+app.post('/admin', (req, res)=>{
+	const { name, price, src, description, category } = req.body;
 	const cake = new Cakes({
 		name: name,
 		price: price,
-		src: src
+		src: src,
+		description: description,
+		category: category
 	});
-	cake.save().then(()=> res.send("saved")).catch(()=>console.log("Error"));
+	cake.save().then(()=> res.send("saved")).catch(()=>res.send("Error with acessing database"));
 });
 
-app.delete('/menu/delete/:id', (req,res)=>{
+app.delete('/admin/:id', (req,res)=>{
 	const {id} = req.params;
-	Cakes.deleteOne({_id: id}).then(()=> res.send('deleted')).catch(()=>console.log('error'));
+	Cakes.findOneAndUpdate({_id: id}, {isShown: false}).then(()=> res.send('deleted')).catch(()=>res.send("Error with acessing database"));
 
 });
 
-app.put('/menu/update/:id', (req, res)=>{
+app.put('/admin/retrive/:id', (req, res)=>{
 	const {id} = req.params;
-	const newData = req.body;
-	Cakes.findOneAndUpdate({_id: id}, newData).then(()=> res.send(newData)).catch(()=>console.log('error'));
+	Cakes.findOneAndUpdate({_id: id}, {isShown: true}).then(()=> res.send(newData)).catch(()=>res.send("Error with acessing database"));
+});
+
+app.put('/admin/update/:id', (req, res)=>{
+	const {id} = req.params;
+	const 
+	Cakes.findOneAndUpdate({_id: id}, {isShown: true}).then(()=> res.send(newData)).catch(()=>res.send("Error with acessing database"));
 });
 
 app.listen(3000, function(){
