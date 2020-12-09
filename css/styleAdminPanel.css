@@ -91,6 +91,21 @@ body{
 			opacity: 0.3;
 		}
 
+		#updButton{
+			padding: 10px;
+			text-align: center;
+			background-color: pink;
+			color: white;
+			font-family: "Sofia", cursive;
+			font-size: 16px;
+			transition: .5s ease;
+		}
+
+		#updButton:hover{
+			cursor: pointer;
+			opacity: 0.3;
+		}
+
 		#menu{
 			display: flex;
 			flex-direction: column;

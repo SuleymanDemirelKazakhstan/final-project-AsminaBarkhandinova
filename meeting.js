@@ -25,7 +25,7 @@ app.use(morgan());
 
 
 app.get('/', (req, res)=>{
-	Cakes.find({}).limit(6).then(data => res.send(data)).catch(()=> res.send("Error with acessing database"));
+	Cakes.find({isShown: true}).limit(6).then(data => res.send(data)).catch(()=> res.send("Error with acessing database"));
 	
 });
 
@@ -65,7 +65,7 @@ app.get('/admin', (req, res)=>{
 	Cakes.find({}).then(data => res.send(data)).catch(()=> res.send("Error with acessing database"));
 });
 
-//CRUD with mongodb
+
 app.post('/admin', (req, res)=>{
 	const { name, price, src, description, category } = req.body;
 	const cake = new Cakes({
@@ -75,7 +75,10 @@ app.post('/admin', (req, res)=>{
 		description: description,
 		category: category
 	});
+	console.log(name);
+	
 	cake.save().then(()=> res.send("saved")).catch(()=>res.send("Error with acessing database"));
+	console.log("saved");
 });
 
 app.delete('/admin/:id', (req,res)=>{
@@ -91,8 +94,10 @@ app.put('/admin/retrive/:id', (req, res)=>{
 
 app.put('/admin/update/:id', (req, res)=>{
 	const {id} = req.params;
-	const 
-	Cakes.findOneAndUpdate({_id: id}, {isShown: true}).then(()=> res.send(newData)).catch(()=>res.send("Error with acessing database"));
+	const { name, price, src, description, category } = req.body;
+	console.log(name);
+	Cakes.findOneAndUpdate({_id: id}, {name: name, price: price, src: src, description: description, category: category}).then(()=> res.send("updated")).catch(()=>res.send("Error with acessing database"));
+	console.log("upd");
 });
 
 app.listen(3000, function(){
