@@ -51,7 +51,8 @@ async function loadJson() {
 			let item = document.createElement('div');
 			item.classList.add('grid-item');
 			item.setAttribute("id", `${cake._id}`);
-			item.innerHTML += `<img class="photo" src="${cake.src}"><p>${cake.name}</p><p>${cake.price} tenge</p>`;
+			
+			item.innerHTML += `<img onclick="openItem('${cake._id}')" class="photo" src="${cake.src}"><p>${cake.name}</p><p>${cake.price} tenge</p>`;
 			
 			if(arr.includes(cake._id)){
 				item.innerHTML += `<img onclick="likeThisItem(event)" style="background-color: pink" class="icon" src="${iconUrl}"/>`
@@ -100,7 +101,8 @@ async function loadFilter() {
 						let item = document.createElement('div');
 						item.classList.add('grid-item');
 						item.setAttribute("id", `${cake._id}`);
-						item.innerHTML += `<img class="photo" src="${cake.src}"><p>${cake.name}</p><p>${cake.price} tenge</p>`;
+						
+						item.innerHTML += `<img onclick="openItem('${cake._id}')" class="photo" src="${cake.src}"><p>${cake.name}</p><p>${cake.price} tenge</p>`;
 						
 						if(arr.includes(cake._id)){
 							item.innerHTML += `<img onclick="likeThisItem(event)" style="background-color: pink" class="icon" src="${iconUrl}"/>`
@@ -120,3 +122,9 @@ async function loadFilter() {
 		}	
 }
 
+async function openItem(id){
+
+	window.location.replace(`http://localhost:4000/menu/${id}`);
+	console.log("clicked");
+	
+}
